@@ -172,7 +172,7 @@ def main():
     parser.add_argument(
         "--n_samples",
         type=int,
-        default=3,
+        default=5,
         help="how many samples to produce for each given prompt. A.k.a. batch size",
     )
     parser.add_argument(
@@ -191,17 +191,18 @@ def main():
         "--from-file",
         type=str,
         help="if specified, load prompts from this file",
+        default='/home/v-xiaodwang/sdm/prompts_office_home.txt'
     )
     parser.add_argument(
         "--config",
         type=str,
-        default="/workspace/sdm/configs/stable-diffusion/v1-inference.yaml",
+        default="/home/v-xiaodwang/sdm/configs/stable-diffusion/v1-inference.yaml",
         help="path to config which constructs model",
     )
     parser.add_argument(
         "--ckpt",
         type=str,
-        default="/workspace/f_xdata/G/nuwa-webui/models/ldm/stable-diffusion-v1/model.ckpt",
+        default="/f_ndata_/G/nuwa-webui/models/ldm/stable-diffusion-v1/model.ckpt",
         help="path to checkpoint of model",
     )
     parser.add_argument(
