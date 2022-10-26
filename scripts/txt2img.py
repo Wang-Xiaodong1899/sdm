@@ -256,9 +256,11 @@ def main():
     else:
         print(f"reading prompts from {opt.from_file}")
         with open(opt.from_file, "r") as f:
-            data = f.read().splitlines()
+            data_ = f.read().splitlines()
             # data = list(chunk(data, batch_size))
-            data = [data] * batch_size
+            # data = [data] * batch_size
+            data = [ [x]*batch_size for x in data_]
+            
 
     sample_path = os.path.join(outpath, "samples")
     os.makedirs(sample_path, exist_ok=True)
@@ -306,7 +308,7 @@ def main():
                                 x_sample = 255. * rearrange(x_sample.cpu().numpy(), 'c h w -> h w c')
                                 img = Image.fromarray(x_sample.astype(np.uint8))
                                 img = put_watermark(img, wm_encoder)
-                                img.save(os.path.join(sample_path, f"{prompts}_{base_count:05}.png"))
+                                img.save(os.path.join(sample_path, f"{prompts[0]}_{base_count:05}.png"))
                                 base_count += 1
 
                         if not opt.skip_grid:
