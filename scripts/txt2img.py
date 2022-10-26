@@ -103,7 +103,8 @@ def main():
     )
     parser.add_argument(
         "--skip_grid",
-        action='store_true',
+        type=bool,
+        default=True,
         help="do not save a grid, only individual samples. Helpful when evaluating lots of samples",
     )
     parser.add_argument(
@@ -256,7 +257,8 @@ def main():
         print(f"reading prompts from {opt.from_file}")
         with open(opt.from_file, "r") as f:
             data = f.read().splitlines()
-            data = list(chunk(data, batch_size))
+            # data = list(chunk(data, batch_size))
+            data = [data] * batch_size
 
     sample_path = os.path.join(outpath, "samples")
     os.makedirs(sample_path, exist_ok=True)
@@ -304,7 +306,7 @@ def main():
                                 x_sample = 255. * rearrange(x_sample.cpu().numpy(), 'c h w -> h w c')
                                 img = Image.fromarray(x_sample.astype(np.uint8))
                                 img = put_watermark(img, wm_encoder)
-                                img.save(os.path.join(sample_path, f"{base_count:05}.png"))
+                                img.save(os.path.join(sample_path, f"{prompts}_{base_count:05}.png"))
                                 base_count += 1
 
                         if not opt.skip_grid:
