@@ -142,7 +142,7 @@ def main():
     parser.add_argument(
         "--n_iter",
         type=int,
-        default=2,
+        default=5,
         help="sample this often",
     )
     parser.add_argument(
@@ -280,8 +280,8 @@ def main():
                 all_samples = list()
                 for n in trange(opt.n_iter, desc="Sampling"):
                     for prompts in tqdm(data, desc="data"):
-                        time_t = round(time.time()*100)%100000000
-                        seed_everything(time_t)
+                        time_t = round(time.time()*100)
+                        seed_everything(time_t%100000000)
                         uc = None
                         if opt.scale != 1.0:
                             uc = model.get_learned_conditioning(batch_size * [""])
@@ -311,7 +311,7 @@ def main():
                                 x_sample = 255. * rearrange(x_sample.cpu().numpy(), 'c h w -> h w c')
                                 img = Image.fromarray(x_sample.astype(np.uint8))
                                 img = put_watermark(img, wm_encoder)
-                                img.save(os.path.join(sample_path, f"{prompts[0]}_{base_count:05}.png"))
+                                img.save(os.path.join(sample_path, f"{prompts[0]}_{time_t}.png"))
                                 base_count += 1
 
                         if not opt.skip_grid:
