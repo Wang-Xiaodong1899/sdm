@@ -1,3 +1,23 @@
+# Image Synthetic for Domain Adaptation
+folllow the [paper](https://arxiv.org/abs/2210.07574), we also generate 2000 synthetic images per class per domain. 
+
+## Office-Home
+Our goal: test the finetuned ResNet50 performance, maybe without source data.
+data preview:
+Art: 2427 images 
+Clipart: 4365 images
+Product: 4439 images
+Real-word: 4357 images
+
+setting: 100 synthetic images per class per domain.
+For 4 domains: 6500 images per domain.
+Prompt: 
+a Alarm_Clock in the style of Art
+a Alarm_Clock in the style of Clipart
+a Alarm_Clock in the style of Product
+a Alarm_Clock in the style of Real world
+
+
 # Stable Diffusion
 *Stable Diffusion was made possible thanks to a collaboration with [Stability AI](https://stability.ai/) and [Runway](https://runwayml.com/) and builds upon our previous work:*
 
