@@ -8,7 +8,7 @@ class_labels = ['Alarm Clock', 'Backpack', 'Batteries', 'Bed', 'Bike', 'Bottle',
 
 f = open('prompts_office_home.txt','a')
 for label in class_labels:
-    for d in ['Art', 'Clipart', 'Product', 'Real World']:
+    for d in ['artistic painting', 'Clipart', 'Product', 'Real World']:
         prompt = f'a {label} in the style of {d}'
         f.write(prompt+'\n')
 f.close()
